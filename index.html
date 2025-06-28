@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Masterclass: Conquer the Web with Code!</title>
+    <style>
+        /* Basic Resets & Body Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f8faff; /* Light Blueish Gray */
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+
+        /* Container for content width */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hero Section (Header) */
+        header {
+            background: linear-gradient(135deg, #f7df1e 0%, #f0c000 100%); /* JavaScript Yellow Gradient */
+            color: #333; /* Dark text for contrast */
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        header::before { /* Subtle background pattern */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,%3Csvg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23000000" fill-opacity="0.08" fill-rule="evenodd"%3E%3Cpath d="M5 0h1L0 6V5zM6 5v1H5z"/%3E%3C/g%3E%3C/svg%3E');
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+        header p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+            color: #444;
+        }
+
+        /* Call to Action Button */
+        .btn {
+            display: inline-block;
+            background-color: #2a9d8f; /* Teal */
+            color: #ffffff;
+            padding: 16px 35px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+        .btn:hover {
+            background-color: #264653; /* Darker Blue on Hover */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        /* Secondary Button (for redirect) */
+        .btn-secondary {
+            display: inline-block;
+            background-color: #ccc; /* Gray */
+            color: #333;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            margin-top: 20px; /* Space from primary CTA */
+        }
+        .btn-secondary:hover {
+            background-color: #a7a7a7;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+            text-align: center;
+        }
+        .section:nth-of-type(even) { /* Alternate background for readability */
+            background-color: #eef4f8; /* Very light blue */
+        }
+        .section h2 {
+            font-size: 2.8em;
+            margin-bottom: 25px;
+            color: #264653; /* Dark Blue */
+            position: relative;
+            display: inline-block;
+        }
+        .section h2::after { /* Underline effect for headings */
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background-color: #f7df1e; /* JS Yellow */
+            border-radius: 2px;
+        }
+        .section p {
+            font-size: 1.15em;
+            max-width: 850px;
+            margin: 0 auto 40px auto;
+            color: #555;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .feature-item {
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        .feature-item h3 {
+            color: #e76f51; /* Orange */
+            margin-bottom: 15px;
+            font-size: 1.6em;
+            display: flex;
+            align-items: center;
+        }
+        .feature-item h3 svg {
+            margin-right: 10px;
+            color: #f7df1e; /* JS Yellow for icon */
+            min-width: 28px;
+        }
+        .feature-item p {
+            font-size: 1em;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 0; /* Remove default paragraph bottom margin */
+        }
+
+        /* Code Example Section */
+        .code-example-container {
+            background-color: #282c34; /* Dark Code Background */
+            color: #abb2bf; /* Light Gray Code Text */
+            padding: 30px;
+            border-radius: 10px;
+            text-align: left;
+            margin: 50px auto;
+            max-width: 800px;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Cascadia Code', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .code-example-container::before { /* Code block "dots" header */
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            width: 12px;
+            height: 12px;
+            background-color: #fc605b; /* Red */
+            border-radius: 50%;
+            box-shadow: 20px 0 0 #fdbc40, 40px 0 0 #34c749; /* Yellow, Green */
+        }
+        .code-example-container pre {
+            margin: 0;
+            padding-top: 20px; /* Space for dots */
+        }
+        .code-example-container code {
+            display: block;
+            white-space: pre-wrap; /* Allows wrapping */
+            word-break: break-all;
+        }
+        /* Specific code highlighting (basic) */
+        .code-example-container .kw { color: #c678dd; } /* Purple for keywords */
+        .code-example-container .str { color: #98c379; } /* Green for strings */
+        .code-example-container .num { color: #d19a66; } /* Orange for numbers */
+        .code-example-container .var { color: #e06c75; } /* Red for variables */
+        .code-example-container .cmt { color: #5c6370; font-style: italic; } /* Gray for comments */
+        .code-example-container .func { color: #61afef; } /* Blue for functions */
+
+
+        /* Testimonial Section */
+        .testimonial {
+            background-color: #264653; /* Dark Blue from gradient */
+            color: #ffffff;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .testimonial::before { /* Subtle background pattern */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,%3Csvg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23ffffff" fill-opacity="0.08" fill-rule="evenodd"%3E%3Cpath d="M5 0h1L0 6V5zM6 5v1H5z"/%3E%3C/g%3E%3C/svg%3E');
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        .testimonial blockquote {
+            font-size: 1.6em;
+            font-style: italic;
+            max-width: 900px;
+            margin: 0 auto 25px auto;
+            position: relative;
+            padding: 0 20px;
+            line-height: 1.5;
+        }
+        .testimonial cite {
+            display: block;
+            font-size: 1.2em;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #f7df1e; /* JS Yellow accent */
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a2b38; /* Even darker blue */
+            color: #bbbbbb;
+            text-align: center;
+            padding: 40px 0;
+            font-size: 0.9em;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            header h1 {
+                font-size: 3em;
+            }
+            .section h2 {
+                font-size: 2.2em;
+            }
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .feature-item {
+                padding: 30px;
+            }
+            .code-example-container {
+                margin-left: 20px;
+                margin-right: 20px;
+                padding: 25px;
+            }
+            .testimonial blockquote {
+                font-size: 1.4em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 60px 20px;
+            }
+            header h1 {
+                font-size: 2.5em;
+            }
+            header p {
+                font-size: 1.1em;
+            }
+            .btn {
+                padding: 14px 30px;
+                font-size: 1em;
+            }
+            .section {
+                padding: 60px 20px;
+            }
+            .section h2 {
+                font-size: 2em;
+            }
+            .section p {
+                font-size: 1em;
+            }
+            .features-grid {
+                grid-template-columns: 1fr; /* Stack features on small screens */
+            }
+            .testimonial blockquote {
+                font-size: 1.2em;
+            }
+            .testimonial cite {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2em;
+            }
+            header p {
+                font-size: 0.95em;
+            }
+            .section h2 {
+                font-size: 1.8em;
+            }
+            .btn-secondary {
+                padding: 8px 18px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>JavaScript Masterclass: Conquer the Web with Code!</h1>
+            <p>Bring your websites to life! Learn JavaScript, the language of interactive web experiences, from beginner to advanced.</p>
+            <a href="#" class="btn">Start Your JS Journey Now!</a>
+            <br>
+            <a href="html_course.html" class="btn-secondary">Looking for the HTML Course?</a>
+        </div>
+    </header>
+
+    <div class="section" id="why-js">
+        <div class="container">
+            <h2>Why JavaScript is Essential</h2>
+            <p>HTML structures content, CSS styles it, but **JavaScript** makes it dynamic and interactive! It's the engine behind animations, form validations, data fetching, and all the cool features you see on modern websites.</p>
+            <p>Mastering JavaScript opens doors to front-end development, back-end (Node.js), mobile apps (React Native), and much more. It's the most versatile language for web development.</p>
+        </div>
+    </div>
+
+    <div class="section" id="what-youll-learn">
+        <div class="container">
+            <h2>What You'll Achieve</h2>
+            <p>Our course covers everything you need to become a proficient JavaScript developer. Get ready to build amazing things:</p>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>Fundamentals of JS</h3>
+                    <p>Variables, data types, operators, control flow (if/else, loops), and functions – the building blocks of any program.</p>
+                </div>
+                <div class="feature-item">
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M9 1v3"></path><path d="M15 1v3"></path><path d="M9 20v3"></path><path d="M15 20v3"></path><path d="M20 9h3"></path><path d="M20 15h3"></path><path d="M1 9h3"></path><path d="M1 15h3"></path></svg>DOM Manipulation</h3>
+                    <p>Learn how to interact with HTML and CSS using JavaScript to dynamically change content, styles, and attributes.</p>
+                </div>
+                <div class="feature-item">
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.11-1.79V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.79 0z"></path><polyline points="2.32 6.16 12 11 21.68 6.16"></polyline><line x1="12" y1="22.72" x2="12" y2="11"></line></svg>Objects & Arrays</h3>
+                    <p>Work with complex data structures, including object-oriented programming (OOP) concepts and array methods.</p>
+                </div>
+                <div class="feature-item">
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cloud-drizzle"><line x1="8" y1="19" x2="8" y2="21"></line><line x1="8" y1="13" x2="8" y2="15"></line><line x1="16" y1="19" x2="16" y2="21"></line><line x1="16" y1="13" x2="16" y2="15"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="12" y1="15" x2="12" y2="17"></line><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"></path></svg>Asynchronous JS (Promises, Async/Await)</h3>
+                    <p>Handle modern web operations like fetching data from APIs without freezing your user interface.</p>
+                </div>
+                <div class="feature-item">
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-hard-drive"><line x1="22" y1="12" x2="2" y2="12"></line><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><line x1="6" y1="16" x2="6.01" y2="16"></line><line x1="10" y1="16" x2="10.01" y2="16"></line></svg>ES6+ Features</h3>
+                    <p>Stay up-to-date with modern JavaScript: arrow functions, template literals, destructuring, and more.</p>
+                </div>
+                <div class="feature-item">
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.77 3.77z"></path></svg>Interactive Projects</h3>
+                    <p>Build mini-games, dynamic forms, and single-page applications to solidify your skills with real-world examples.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="code-in-action">
+        <div class="container">
+            <h2>JavaScript in Action: Make it Dynamic!</h2>
+            <p>See how a few lines of JavaScript can transform a static page into an interactive experience. You'll write code like this and more:</p>
+            <div class="code-example-container">
+                <pre><code><span class="cmt">// Get a reference to an HTML element</span>
+<span class="kw">const</span> <span class="var">myButton</span> <span class="kw">=</span> <span class="kw">document</span>.<span class="func">getElementById</span>(<span class="str">'myClickButton'</span>);
+<span class="kw">const</span> <span class="var">messageDiv</span> <span class="kw">=</span> <span class="kw">document</span>.<span class="func">getElementById</span>(<span class="str">'message'</span>);
+
+<span class="cmt">// Add an event listener to the button</span>
+<span class="var">myButton</span>.<span class="func">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>() {
+    <span class="cmt">// Change the content of the message div</span>
+    <span class="var">messageDiv</span>.textContent <span class="kw">=</span> <span class="str">'Hello, JavaScript World! You clicked me!'</span>;
+    <span class="var">messageDiv</span>.style.color <span class="kw">=</span> <span class="str">'#2a9d8f'</span>; <span class="cmt">// Change text color</span>
+    <span class="var">messageDiv</span>.style.fontWeight <span class="kw">=</span> <span class="str">'bold'</span>;
+});
+
+<span class="cmt">// Example of a simple function</span>
+<span class="kw">function</span> <span class="func">greet</span>(<span class="var">name</span>) {
+    <span class="kw">return</span> <span class="str">`Welcome, ${</span><span class="var">name</span><span class="str">}!`;</span>
+}
+
+<span class="kw">console</span>.<span class="func">log</span>(<span class="func">greet</span>(<span class="str">'Learner'</span>)); <span class="cmt">// Outputs to console: "Welcome, Learner!"</span></code></pre>
+            </div>
+            <p>From simple clicks to complex web applications, JavaScript is your key to making the web dynamic and user-friendly.</p>
+            <button id="myClickButton" style="background-color: #f7df1e; color: #333; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">Click Me!</button>
+            <div id="message" style="margin-top: 15px; font-size: 1.2em;"></div>
+            <script>
+                // This script is within the HTML for demonstration
+                const myButton = document.getElementById('myClickButton');
+                const messageDiv = document.getElementById('message');
+
+                myButton.addEventListener('click', function() {
+                    messageDiv.textContent = 'Hello, JavaScript World! You clicked me!';
+                    messageDiv.style.color = '#2a9d8f';
+                    messageDiv.style.fontWeight = 'bold';
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="testimonial">
+        <div class="container">
+            <blockquote>"After learning HTML with them, diving into JavaScript was a no-brainer. The course is incredibly well-structured, and I'm already building interactive elements I never thought possible!"</blockquote>
+            <cite>- Rohan K., Junior Web Developer</cite>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 JavaScript Masterclass. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
